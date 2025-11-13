@@ -15,10 +15,16 @@ struct ContentView: View {
     @State private var alertTitle: String = ""
     @State private var alertMessage: String = ""
     @State private var showingAlert = false
-    
+    @State private var headerText: Date = defaultSleepTime
     static var defaultWakeTime : Date {
         var components = DateComponents()
         components.hour = 7
+        components.minute = 0
+        return Calendar.current.date(from: components) ?? .now
+    }
+    static var defaultSleepTime : Date {
+        var components = DateComponents()
+        components.hour = 21
         components.minute = 0
         return Calendar.current.date(from: components) ?? .now
     }
@@ -26,24 +32,51 @@ struct ContentView: View {
         
         NavigationStack {
             Form {
+                Section {
+                    // Empty content; this is just a header row
+                } header: {
+                    Text("Your ideal bedtime is \(headerText.formatted(date: .omitted, time: .shortened))")
+                        .font(.title2)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.blue)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .padding(.vertical, 8)
+                }
                 VStack(alignment: .leading, spacing: 0){
                     Text("When do you want to wake up?")
                         .font(.headline)
+                    HStack {
+                        Spacer()
+                        DatePicker("Please enter a time", selection: $wakeUp, displayedComponents: .hourAndMinute)
+                            .labelsHidden()
+                            .padding(.horizontal, 16)
+                            .onChange(of: wakeUp){ _, __ in
+                                calculateBedtime()
+                            }
+                    }
                     
-                    DatePicker("Please enter a time", selection: $wakeUp, displayedComponents: .hourAndMinute)
-                        .labelsHidden()
                 }
                 VStack(alignment: .leading, spacing: 0){
                     Text("Desired amount of sleep")
                         .font(.headline)
                     
                     Stepper("\(sleepAmount.formatted())", value: $sleepAmount, in: 4...12, step: 0.25)
+                        .onChange(of: sleepAmount) { _, __ in
+                            calculateBedtime()
+                        }
                 }
                 VStack(alignment: .leading, spacing: 0){
                     Text("Daily coffee intake")
                         .font(.headline)
                     
-                    Stepper("^[\(coffeeAmount) cup](inflect: true)", value: $coffeeAmount, in: 1...20)
+                    Picker("", selection: $coffeeAmount){
+                        ForEach(1...10, id: \.self){
+                            Text("^[\($0) cup](inflect: true)")
+                        }
+                    }
+                    .onChange(of: coffeeAmount) { _, __ in
+                        calculateBedtime()
+                    }
                 }
             }
             .navigationTitle("BetterRest")
@@ -69,16 +102,13 @@ struct ContentView: View {
             
             let prediction = try model.prediction(wake: Double(hour + minute), estimatedSleep: sleepAmount, coffee: Double(coffeeAmount))
                                                   
-            let sleepTime = wakeUp - prediction.actualSleep
-            
-            alertTitle = "Your ideal sleeptime is..."
-            alertMessage = sleepTime.formatted(date: .omitted, time: .shortened)
+            headerText = wakeUp - prediction.actualSleep
         } catch {
             alertTitle = "Error"
             alertMessage = "Failed to make a prediction."
+            showingAlert.toggle()
         }
-        
-        showingAlert.toggle()
+
     }
 }
 
