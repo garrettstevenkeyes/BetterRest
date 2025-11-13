@@ -1,0 +1,29 @@
+{
+  "activityEntities" : [
+    "projectCreated",
+    [
+      {
+        "createdDate" : "2025-11-11T02:20:55Z",
+        "event" : "projectCreated",
+        "id" : "289100FB-E4B0-42B0-ABA5-8733A3792EF2",
+        "subtitle" : "BetterRest",
+        "title" : "Project Created"
+      }
+    ]
+  ],
+  "authorName" : "Garrett Keyes",
+  "createdDate" : "2025-11-11T02:20:55Z",
+  "description" : "",
+  "id" : "AD7E3389-3ED2-421D-BB74-9BD76F81F5BB",
+  "license" : "",
+  "location" : "",
+  "modifiedDate" : "2025-11-11T02:20:55Z",
+  "projectName" : "BetterRest",
+  "settingsEntity" : {
+    "snapshotOnExtendTraining" : true,
+    "snapshotOnResumeTraining" : false
+  },
+  "taskType" : "generalRegresor",
+  "title" : "Tabular Regression",
+  "version" : "1.1"
+}

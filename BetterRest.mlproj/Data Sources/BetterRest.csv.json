@@ -1,0 +1,41 @@
+{
+  "activityEntities" : [
+    "dataSourceTrainingStarted",
+    [
+      {
+        "createdDate" : "2025-11-11T02:30:02Z",
+        "event" : "dataSourceTrainingStarted",
+        "id" : "2863940C-3E5A-47ED-8937-38CA120BEE7B",
+        "subtitle" : "BetterRest 1",
+        "title" : "Used By"
+      }
+    ],
+    "dataSourceMetrics",
+    [
+      {
+        "createdDate" : "2025-11-11T02:30:02Z",
+        "event" : "dataSourceMetrics",
+        "id" : "53E7F81D-EA59-4E55-B2F7-7DBFB54781D1",
+        "subtitle" : "10,000 Items",
+        "title" : "Data Summary"
+      }
+    ]
+  ],
+  "createdDate" : "2025-11-11T02:27:41Z",
+  "dataPathRelativeToProjectURL" : "../BetterRest.csv/",
+  "dataResult" : {
+    "createdDate" : "2025-11-11T02:27:41Z",
+    "dataSourceID" : "59B838EB-1B66-47B8-BC5F-B0EA15A34195",
+    "dataURL" : "file:///Users/garrettkeyes/Documents/swift_intro/BetterRest/BetterRest.csv"
+  },
+  "dataURL" : "file:///Users/garrettkeyes/Documents/swift_intro/BetterRest/BetterRest.csv",
+  "experimentIDs" : [
+    "D7E41C6A-86FE-4AB7-8D31-AC980779038E"
+  ],
+  "id" : "59B838EB-1B66-47B8-BC5F-B0EA15A34195",
+  "modifiedDate" : "2025-11-11T02:30:02Z",
+  "pathType" : 0,
+  "preferredFilename" : "BetterRest.csv",
+  "title" : "BetterRest.csv",
+  "version" : "1.0"
+}
